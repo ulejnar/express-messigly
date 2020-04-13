@@ -1,3 +1,5 @@
+const { DB_URI, SECRET_KEY, BCRYPT_WORK_FACTOR } = require("../config");
+
 /** POST /login - login: {username, password} => {token}
  *
  * Make sure to update their last-login!
