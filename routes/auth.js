@@ -19,13 +19,13 @@ const BAD_REQUEST = 400;
   router.post('/login', async function(req, res, next) {
     try {
       const {username, password} = req.body;
-      let isValidUser = User.authenticate(username, password);
+      let isValidUser = await User.authenticate(username, password);
 
     if (isValidUser) {
       let payload = {username};
       let token = jwt.sign(payload, SECRET_KEY);
 
-      User.updateLoginTimestamp(username);
+      await User.updateLoginTimestamp(username);
 
       return res.json(token);
     }
