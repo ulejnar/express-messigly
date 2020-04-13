@@ -32,10 +32,8 @@ class User {
   
 
   /** QUESTIONS */
-  // TO DECIDE LATER ON IF WE NEED TO PASS IN last_login_at INTO CREATION OF USER
-  // WHY DOESN'T MESSAGES HAVE SOME DESTRUCTURING OF VARIABLES LIKE THIS
+  // WHY DO'T WE NEED TO RETURN RESULT.ROWS IF WE DON'T END UP USING IN THE ROUTE?
   // WHY DON'T WE NEED TO THROW AN ERROR HERE IF THEY DON'T PASS IN VALID PARAMETERS (E.G. NON UNIQUE USERNAME, OR MISSING NULLABLE=FALSE PARAMETERS)
-  // const {username, password, first_name, last_name, phone} = req.body;
 
   static async register({username, password, first_name, last_name, phone}) { 
     
@@ -57,7 +55,31 @@ class User {
 
   /** Authenticate: is this username/password valid? Returns boolean. */
 
-  static async authenticate(username, password) { }
+  // QUESTIONS
+  // Why was password listed as a parameter here if we don't need to pass it into anything? 
+  // (Since we do bcrypt compare logic inside the view function in auth.js)
+
+  static async authenticate(username, password) {
+
+    const result = await db.query(`
+      SELECT password 
+      FROM users 
+      WHERE username = $1`,
+      [username]);
+    
+    const user = result.rows[0];
+    let isValidUser = await bcrypt.compare(password, user.password);
+
+    if (isValidUser) {
+      await db.query(`
+        UPDATE users
+        SET last_login_at = current_timestamp
+        WHERE username = $1`,
+        [username])
+    }
+
+    return isValidUser;
+  }
 
   /** Update last_login_at for user */
 
