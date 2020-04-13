@@ -24,6 +24,9 @@ const BAD_REQUEST = 400;
     if (isValidUser) {
       let payload = {username};
       let token = jwt.sign(payload, SECRET_KEY);
+
+      User.updateLoginTimestamp(username);
+
       return res.json(token);
     }
     
@@ -51,7 +54,7 @@ const BAD_REQUEST = 400;
       const hashedPassword = await bcrypt.hash(
         password, BCRYPT_WORK_FACTOR);
       
-      User.register(username, hashedPassword, first_name, last_name, phone);
+      await User.register(username, hashedPassword, first_name, last_name, phone);
 
       let payload = {username};
       let token = jwt.sign(payload, SECRET_KEY);

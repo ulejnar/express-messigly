@@ -35,7 +35,7 @@ class User {
   // WHY DO'T WE NEED TO RETURN RESULT.ROWS IF WE DON'T END UP USING IN THE ROUTE?
   // WHY DON'T WE NEED TO THROW AN ERROR HERE IF THEY DON'T PASS IN VALID PARAMETERS (E.G. NON UNIQUE USERNAME, OR MISSING NULLABLE=FALSE PARAMETERS)
 
-  static async register({username, password, first_name, last_name, phone}) { 
+  static async register(username, password, first_name, last_name, phone) { 
     
     const result = await db.query(
       `INSERT INTO users (
@@ -46,7 +46,7 @@ class User {
         phone,
         join_at,
         last_login_at)
-        VALUE ($1, $2, $3, $4, $5, current_timestamp, current_timestamp)
+        VALUES ($1, $2, $3, $4, $5, current_timestamp, current_timestamp)
         RETURNING username, password, first_name, last_name, phone`, 
         [username, password, first_name, last_name, phone]);
   
@@ -68,26 +68,25 @@ class User {
       [username]);
     
     const user = result.rows[0];
-    let isValidUser = await bcrypt.compare(password, user.password);
 
-    if (isValidUser) {
-      await db.query(`
-        UPDATE users
-        SET last_login_at = current_timestamp
-        WHERE username = $1`,
-        [username])
-    }
-
-    return isValidUser;
+    return (await bcrypt.compare(password, user.password));
   }
+
 
   /** Update last_login_at for user */
 
-  static async updateLoginTimestamp(username) { }
+  static async updateLoginTimestamp(username) {
+    await db.query(`
+        UPDATE users
+        SET last_login_at = current_timestamp
+        WHERE username = $1`,
+        [username]);
+  }
+
 
   /** All: basic info on all users:
    * [{username, first_name, last_name, phone}, ...] */
-
+  
   static async all() { }
 
   /** Get: get user by username
