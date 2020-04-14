@@ -72,4 +72,4 @@ const BAD_REQUEST = 400;
 
  /// first token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNqYnJvb2tzIiwiaWF0IjoxNTg2ODEzNzQwfQ.lfENx8nFo7w3eW8-4cCAFL2oyS2e0Z9hCPKWBvNaymg"
 
-// token upon login: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNqYnJvb2tzIiwiaWF0IjoxNTg2ODE2MDA4fQ.MUBqrTZbhyegAgLocZeBkuRiZ35qO9Erd4SH0mDku4g"
+// token upon login: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNqYnJvb2tzIiwiaWF0IjoxNTg2ODcxMDc2fQ.aDEAXpg_T5wTJr3sM9xUySZ-bSXH2P0m80VZJN-ODuI"
