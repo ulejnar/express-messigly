@@ -40,10 +40,10 @@ router.get('/:username',
       let username = req.params.username;
       let user = await User.get(username);
 
-      return res.json({user});
+      return res.json({ user });
 
     } catch (err) {
-      return next (err);
+      return next(err);
     }
   })
 
@@ -65,10 +65,10 @@ router.get('/:username/to',
       let username = req.params.username;
       let messages = await User.messagesTo(username);
 
-      return res.json({messages});
+      return res.json({ messages });
 
     } catch (err) {
-      return next (err);
+      return next(err);
     }
   })
 
@@ -91,10 +91,10 @@ router.get('/:username/from',
       let username = req.params.username;
       let messages = await User.messagesFrom(username);
 
-      return res.json({messages});
+      return res.json({ messages });
 
     } catch (err) {
-      return next (err);
+      return next(err);
     }
   })
 

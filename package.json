@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest -i",
+    "debug-test": "node --inspect-brk $(which jest) --runInBand",
     "start": "nodemon server.js"
   },
   "author": "",

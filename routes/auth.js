@@ -51,6 +51,7 @@ const BAD_REQUEST = 400;
     try {
       const {username, password, first_name, last_name, phone} = req.body;
       
+      debugger
       const hashedPassword = await bcrypt.hash(
         password, BCRYPT_WORK_FACTOR);
       
@@ -61,6 +62,7 @@ const BAD_REQUEST = 400;
 
       return res.json(token);
     } catch (err) {
+      console.error(err);
       return next(err)
     }
   })
