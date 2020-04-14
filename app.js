@@ -21,11 +21,11 @@ app.use(authenticateJWT);
 /** routes */
 
 const authRoutes = require("./routes/auth");
-// const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/users");
 // const messageRoutes = require("./routes/messages");
 
 app.use("/auth", authRoutes);
-// app.use("/users", userRoutes);
+app.use("/users", userRoutes);
 // app.use("/messages", messageRoutes);
 
 /** 404 handler */
@@ -49,3 +49,6 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVsZWpuYXIiLCJpYXQiOjE1ODY4MjQ3MTR9.kZOwje9FrSib_wGK3PzUe06CKC9NP77MiqS9u2WKx-o"
