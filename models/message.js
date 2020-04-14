@@ -12,7 +12,7 @@ class Message {
    *    {id, from_username, to_username, body, sent_at}
    */
 
-  static async create({ from_username, to_username, body }) {
+  static async create(from_username, to_username, body) {
     const result = await db.query(
       `INSERT INTO messages (
               from_username,
@@ -22,6 +22,10 @@ class Message {
             VALUES ($1, $2, $3, current_timestamp)
             RETURNING id, from_username, to_username, body, sent_at`,
       [from_username, to_username, body]);
+    
+      if (result.rows.length === 0) {
+        throw new ExpressError("Message was not successfully created")
+      }
 
     return result.rows[0];
   }

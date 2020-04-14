@@ -169,3 +169,9 @@ class User {
 }
 
 module.exports = User;
+
+// token for user ulejnar
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVsZWpuYXIiLCJpYXQiOjE1ODY4ODc0OTd9.iVns5ukeqLCToHs8l9csTxPscK2ETmfQZyAOUsD6tVs"
+
+// token for puppy
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InB1cHB5IiwiaWF0IjoxNTg2ODg3NzIzfQ.V08bid4dddnYr0-9jyyVEOCzAxBLTW3kGi0UEJclqKM"
